@@ -1,0 +1,10 @@
+<i *ngIf="authenticated">
+    <font size="-2">
+        <i style="color:darkgray">
+            {{firstName}} {{lastName}}
+        </i>
+    </font>
+    <app-tabs></app-tabs>
+
+</i>
+<p *ngIf="!authenticated">Please register!</p>

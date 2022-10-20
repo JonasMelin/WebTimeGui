@@ -1,28 +1,30 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatTabsModule } from '@angular/material/tabs';
-import { Routes, RouterModule } from '@angular/router';
+import { BackEndRestClient } from './service/BackEndRestClient';
 
+import { HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TabsComponent } from './tabs/tabs.component';
-import { UrlparamsComponent } from './urlparams/urlparams.component';
+import { BackendauthComponent } from './backendauth/backendauth.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     TabsComponent,
-    UrlparamsComponent
+    BackendauthComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatTabsModule
+    MatTabsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [BackEndRestClient],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

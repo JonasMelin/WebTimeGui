@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UrlparamsComponent } from './urlparams.component';
+import { BackendauthComponent } from './backendauth.component';
 
-describe('UrlparamsComponent', () => {
-  let component: UrlparamsComponent;
-  let fixture: ComponentFixture<UrlparamsComponent>;
+describe('BackendauthComponent', () => {
+  let component: BackendauthComponent;
+  let fixture: ComponentFixture<BackendauthComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ UrlparamsComponent ]
+      declarations: [ BackendauthComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UrlparamsComponent);
+    fixture = TestBed.createComponent(BackendauthComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
