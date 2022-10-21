@@ -1,15 +1,16 @@
+<div>
+    <font size="-2">
+        <i style="color:darkgray">
+        </i> <b>Web Time Log</b> - 
+        <i *ngIf="authenticated">{{firstName}} {{lastName}}</i>
+        <i *ngIf="!authenticated">Please register to use this service... </i>
+        
+    </font>
 
-<font size="-2">
-    <i style="color:darkgray">
-    </i> <b>Web Time Log</b> - 
-    <i *ngIf="authenticated">{{firstName}} {{lastName}}</i>
-    <i *ngIf="!authenticated">Please register to use this service... </i>
-    
-</font>
-
-<p *ngIf="authenticated">
-    <app-tabs></app-tabs>
-</p>
-<p *ngIf="!authenticated">
-    <app-registeruser></app-registeruser>
-</p>
+    <p *ngIf="authenticated">
+        <app-tabs></app-tabs>
+    </p>
+    <p *ngIf="!authenticated">
+        <app-registeruser></app-registeruser>
+    </p>
+</div>

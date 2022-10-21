@@ -1,27 +1,35 @@
 
-<div>
-<form (submit)="$event.preventDefault()">    
+
+<hr>
+<mat-form-field appearance="fill">
+    <mat-label>First name</mat-label>
+    <input [disabled]="registration_complete" mdbInput type="text" class="form-control" id="firstname_form"  matInput #first>
+</mat-form-field>
+<br>
+
+<mat-form-field appearance="fill">
+    <mat-label>Last name</mat-label>
+    <input [disabled]="registration_complete" mdbInput type="text" class="form-control" id="lastname_form" matInput #last>
+    
+</mat-form-field>
+<br>
+
+<mat-form-field appearance="fill">
+    <mat-label>Email</mat-label>
+    <input [disabled]="registration_complete" mdbInput type="text" class="form-control" id="email_form" matInput #email>
+    </mat-form-field>
+<br>
+
+<button *ngIf="!registration_complete" (mouseup)="submit()"> Register </button>
+<br>
+<div *ngIf="registration_complete">
+    <p> 
+        This is your private access URL. Please <b>bookmark</b> it and use it for all future access: 
+        <br>
+    </p>
     <hr>
-    <mat-form-field appearance="fill">
-      <mat-label>First name</mat-label>
-      <input matInput #first>
-    </mat-form-field>
-    <br>
-
-    <mat-form-field appearance="fill">
-      <mat-label>Last name</mat-label>
-      <input matInput #last>
-    </mat-form-field>
-    <br>
-
-    <mat-form-field appearance="fill">
-        <mat-label>Email</mat-label>
-        <input matInput #email>
-      </mat-form-field>
-    <br>
-
-    <div>
-    <button mat-raised-button> Register </button>
-    </div>
-  </form>
+    <p>
+        <b>{{user_message}}</b>
+    </p>
+    <hr>
 </div>

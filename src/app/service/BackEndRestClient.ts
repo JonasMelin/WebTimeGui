@@ -10,5 +10,14 @@ export class BackEndRestClient {
   getUser(token: string): Observable<any>  {
     return this.httpClient.get('api/v1/user/' + token);
   }
+
+  registerUser(first: string, last: string, email: string): Observable<any>  {
+    var body = {
+        "firstName": first,
+        "lastName": last,
+        "email": email
+    }
+    return this.httpClient.post('api/v1/user', body);
+  }
 }
 

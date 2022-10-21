@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { MatTabsModule } from '@angular/material/tabs';
 import { TextFieldModule} from '@angular/cdk/text-field';
 import { MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
+import { MatInputModule} from '@angular/material/input';
 import { BackEndRestClient } from './service/BackEndRestClient';
 
 import { HttpClientModule} from '@angular/common/http';
