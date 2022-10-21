@@ -1,0 +1,27 @@
+
+<div>
+<form (submit)="$event.preventDefault()">    
+    <hr>
+    <mat-form-field appearance="fill">
+      <mat-label>First name</mat-label>
+      <input matInput #first>
+    </mat-form-field>
+    <br>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Last name</mat-label>
+      <input matInput #last>
+    </mat-form-field>
+    <br>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput #email>
+      </mat-form-field>
+    <br>
+
+    <div>
+    <button mat-raised-button> Register </button>
+    </div>
+  </form>
+</div>
