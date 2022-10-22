@@ -30,7 +30,7 @@ export class RegisteruserComponent implements OnInit {
       console.log("REGISTERRED OK! " + retData)
       if ("token" in retData) {
         console.log("TOKEN: " + retData["token"])
-        this.user_message = "http://127.0.0.1:4200/?token=" + retData["token"]
+        this.user_message = "http://188.149.192.52:7612/?token=" + retData["token"]
         this.registration_complete = true
       }
     }, error => {
