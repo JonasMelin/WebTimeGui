@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BackEndRestClient } from '../service/BackEndRestClient';
+import { SharedComponent } from '../shared/shared.component';
 
 @Component({
   selector: 'app-registeruser',
@@ -9,12 +10,17 @@ import { BackEndRestClient } from '../service/BackEndRestClient';
 export class RegisteruserComponent implements OnInit {
 
   private restClient: BackEndRestClient;
+  private sharedComponent: SharedComponent;
 
   user_message: string = ""
   registration_complete: boolean = false
 
-  constructor(restClient: BackEndRestClient) { 
-    this.restClient = restClient
+  constructor(
+      restClient: BackEndRestClient,
+      sharedComponent: SharedComponent
+      ) { 
+      this.restClient = restClient 
+      this.sharedComponent = sharedComponent
   }
 
 
@@ -29,12 +35,14 @@ export class RegisteruserComponent implements OnInit {
     this.restClient.registerUser(firstName.value, lastName.value, email.value).subscribe(retData => {
       console.log("REGISTERRED OK! " + retData)
       if ("token" in retData) {
-        console.log("TOKEN: " + retData["token"])
         this.user_message = "http://188.149.192.52:7612/?token=" + retData["token"]
         this.registration_complete = true
+        this.sharedComponent.showSnackbar("User Registered OK!", 2500)
       }
     }, error => {
-      console.log("REGISTERRED FAILED!")
+      alert("Could not register user: " + this.sharedComponent.errorMsgToString(error))
     });
   }
+
+  
 }

@@ -6,6 +6,7 @@ import { MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule} from '@angular/material/input';
 import { BackEndRestClient } from './service/BackEndRestClient';
 
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,6 +14,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TabsComponent } from './tabs/tabs.component';
 import { BackendauthComponent } from './backendauth/backendauth.component';
 import { RegisteruserComponent } from './registeruser/registeruser.component';
+import { ManagetabComponent } from './managetab/managetab.component';
+import { SharedComponent } from './shared/shared.component';
 
 
 @NgModule({
@@ -20,7 +23,8 @@ import { RegisteruserComponent } from './registeruser/registeruser.component';
     AppComponent,
     TabsComponent,
     BackendauthComponent,
-    RegisteruserComponent
+    RegisteruserComponent,
+    ManagetabComponent
   ],
   imports: [
     BrowserModule,
@@ -30,9 +34,10 @@ import { RegisteruserComponent } from './registeruser/registeruser.component';
     TextFieldModule,
     MatFormFieldModule,
     MatInputModule,
-    HttpClientModule
+    HttpClientModule,
+    MatSnackBarModule
   ],
-  providers: [BackEndRestClient],
+  providers: [BackEndRestClient, SharedComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
