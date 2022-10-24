@@ -40,8 +40,24 @@ export class UserLogComponent implements OnInit {
   updateLog() {
     console.log("updateLog")
 
-    const newActivityName = <HTMLInputElement>document.getElementById('selected_project')
-    console.log(newActivityName.value)
+    const newActivityName = <HTMLInputElement>document.getElementById('selected_activity')
+    console.log(newActivityName.textContent)
+    const newProjectName = <HTMLInputElement>document.getElementById('selected_project')
+    console.log(newProjectName.textContent)
+
+    if (newActivityName.textContent != null && newProjectName.textContent != null) {
+      this.restClient?.updateLogging(GlobalVariable.auth_token, newActivityName.textContent, newProjectName.textContent, 60).subscribe(retData => {
+      
+      this.sharedComponent.showSnackbar("Logging started!", 2500)
+      console.log("Logging started!!")
+      }, error => {
+        console.log("Could not start logging :-(")
+        alert("Could not start logging?!")
+      });
+    } else {
+      alert("You must select projects and activities!")
+    }
+
   }
 
   refreshDataFromBackend() {
