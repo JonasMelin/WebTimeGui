@@ -19,8 +19,10 @@ export class SharedComponent implements OnInit {
   }
 
   showSnackbar(message: string, timeoutMs: number) {
-    let simpleSnackBarRef = this.snackBar.open(message, "OK")
-    setTimeout(simpleSnackBarRef.dismiss.bind(simpleSnackBarRef), timeoutMs);
+    let simpleSnackBarRef = this.snackBar.open(message, "OK", {
+      duration: timeoutMs,
+      panelClass: ['mat-toolbar', 'mat-primary']
+    })
   }
 
   errorMsgToString(error: any) {

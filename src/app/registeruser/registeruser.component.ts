@@ -37,7 +37,7 @@ export class RegisteruserComponent implements OnInit {
       if ("token" in retData) {
         this.user_message = "http://188.149.192.52:7612/?token=" + retData["token"]
         this.registration_complete = true
-        this.sharedComponent.showSnackbar("User Registered OK!", 2500)
+        this.sharedComponent.showSnackbar("User Registered OK!", 5000)
       }
     }, error => {
       alert("Could not register user: " + this.sharedComponent.errorMsgToString(error))

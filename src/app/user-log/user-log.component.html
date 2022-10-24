@@ -1,0 +1,19 @@
+<hr>
+
+<mat-form-field appearance="fill">
+  <mat-label>Choose an activity</mat-label>
+  <mat-select [disabled]="disableSelect">
+    <mat-option *ngFor="let activity of activityList" [value]="activity">{{activity}}</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<hr>
+<mat-form-field appearance="fill">
+    <mat-label>Choose a project</mat-label>
+    <mat-select [disabled]="disableSelect" id="selected_project">
+      <mat-option *ngFor="let project of projectList" [value]="project">{{project}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+<hr>
+<button (mouseup)="updateLog()" class="my-button"> GO! </button>
+<hr>

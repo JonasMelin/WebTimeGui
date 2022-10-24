@@ -6,6 +6,7 @@ import { MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule} from '@angular/material/input';
 import { BackEndRestClient } from './service/BackEndRestClient';
 
+import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
@@ -16,6 +17,7 @@ import { BackendauthComponent } from './backendauth/backendauth.component';
 import { RegisteruserComponent } from './registeruser/registeruser.component';
 import { ManagetabComponent } from './managetab/managetab.component';
 import { SharedComponent } from './shared/shared.component';
+import { UserLogComponent } from './user-log/user-log.component';
 
 
 @NgModule({
@@ -24,13 +26,15 @@ import { SharedComponent } from './shared/shared.component';
     TabsComponent,
     BackendauthComponent,
     RegisteruserComponent,
-    ManagetabComponent
+    ManagetabComponent,
+    UserLogComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatTabsModule,
+    MatSelectModule,
     TextFieldModule,
     MatFormFieldModule,
     MatInputModule,
