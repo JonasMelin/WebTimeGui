@@ -19,7 +19,16 @@
 
 <hr>
 <button (mouseup)="updateLog()" class="my-start-button"> GO </button>
+
+<i> Expire in: </i> 
+  <input mdbInput type="text" id="expire_h" class="my-expire-button" [defaultValue]="0" style="width:20px;"> 
+  h
+  <input mdbInput type="text" id="expire_min" class="my-expire-button" [defaultValue]="60" style="width:20px;"> 
+  min
+<br>
 <button [disabled]="!ongoingRecordings" (mouseup)="stopLog()" class="my-stop-button"> STOP </button>
 <br>
-<i *ngIf="ongoingRecordings"> Ongoing: {{ongoingProject}}/{{ongoingActivity}} (Expires in {{ongoingExpireTimeH}}h:{{ongoingExpireTimeMin}}min)</i>
+<i class="my-expire-button" *ngIf="ongoingRecordings"> {{ongoingProject}}/{{ongoingActivity}}</i>
+<br>
+<i class="my-expire-button" *ngIf="ongoingRecordings"> Expires in {{ongoingExpireTimeH}}h:{{ongoingExpireTimeMin}}min</i>
 <hr>

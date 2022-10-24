@@ -48,21 +48,40 @@ export class UserLogComponent implements OnInit {
     console.log("updateLog")
 
     const newActivityName = <HTMLInputElement>document.getElementById('selected_activity')
-    console.log(newActivityName.textContent)
     const newProjectName = <HTMLInputElement>document.getElementById('selected_project')
-    console.log(newProjectName.textContent)
+    const expireH = <HTMLInputElement>document.getElementById('expire_h')
+    const expireMin = <HTMLInputElement>document.getElementById('expire_min')
 
-    if (newActivityName.textContent != null && newActivityName.textContent != "" && newProjectName.textContent != null && newProjectName.textContent != "") {
-      this.restClient?.updateLogging(GlobalVariable.auth_token, newActivityName.textContent, newProjectName.textContent, 60).subscribe(retData => {
+    if (expireH.value != null && expireH.value!= null &&  newActivityName.textContent != null && newActivityName.textContent != "" && newProjectName.textContent != null && newProjectName.textContent != "") {
+
+      var parsedH = 0
+      var parsedMin = 0
+      var totalMin = 0
+      try {
+        parsedH = parseInt(expireH.value, 10);
+        parsedMin = parseInt(expireMin.value, 10);
+        if (parsedH < 0) {throw new Error("Expire hour must be potitive...")}
+        if (parsedMin < 0) {throw new Error("Expire minute must be potitive...")}
+        if (parsedMin > 60) {throw new Error("Expire minute must be less than 60...")}
+        if (parsedMin == 0 && parsedH == 0) {throw new Error("Set expire greater than 0...")}
+        totalMin = parsedH * 60 + parsedMin
+      } catch (error) {
+        alert("Bad expire numbers. Use positive integers! " + error)
+        return
+      }
+
+      //var expireMinTot = expireH.value * 60
+
+      this.restClient?.updateLogging(GlobalVariable.auth_token, newActivityName.textContent, newProjectName.textContent, totalMin).subscribe(retData => {
       
       this.sharedComponent.showSnackbar("Logging started!", 2500)
       this.refreshDataFromBackend()
       }, error => {
         console.log("Could not start logging :-(")
-        alert("Could not start logging?!")
+        alert("Could not start logging?! " + this.sharedComponent.errorMsgToString(error))
       });
     } else {
-      alert("You must select projects and activities!")
+      alert("You must select projects and activities, and proper expire values...")
     }
   }
 

@@ -15,6 +15,7 @@
     font-size: 40px;
     margin-left: 4px;
     margin-top: 4px;
+    margin-bottom: 4px;
     background-color: green;
 }
 
@@ -26,5 +27,12 @@
   font-size: 40px;
   margin-left: 4px;
   margin-top: 4px;
+  margin-bottom: 4px;
   background-color: red;
+}
+
+.my-expire-button {
+  margin-left: 4px;
+  margin-top: 4px;
+  margin-bottom: 4px;
 }
