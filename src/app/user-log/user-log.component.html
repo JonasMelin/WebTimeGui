@@ -2,7 +2,7 @@
 
 <mat-form-field appearance="fill">
   <mat-label>Choose an activity</mat-label>
-  <mat-select [disabled]="disableSelect">
+  <mat-select [disabled]="disableSelect" id="selected_activity">
     <mat-option *ngFor="let activity of activityList" [value]="activity">{{activity}}</mat-option>
   </mat-select>
 </mat-form-field>

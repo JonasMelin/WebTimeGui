@@ -9,14 +9,31 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class SharedComponent implements OnInit {
 
   private snackBar: MatSnackBar;
+  private emitterCallbackFunctions: (()=>void)[] = []
 
-  constructor(snackBar: MatSnackBar) { 
+  constructor(snackBar: MatSnackBar) {
     this.snackBar = snackBar
     
   }
 
   ngOnInit(): void {
   }
+
+  registerEmitterListener(arg:()=>void) {
+    this.emitterCallbackFunctions.push(arg)
+  }
+
+  emit() {
+
+    for (var callback of this.emitterCallbackFunctions) {
+      try {
+        callback()
+      }catch (error) {
+        console.log("Error in emit loop. Ignoring: " + error)
+      }
+    }
+  }
+
 
   showSnackbar(message: string, timeoutMs: number) {
     let simpleSnackBarRef = this.snackBar.open(message, "OK", {

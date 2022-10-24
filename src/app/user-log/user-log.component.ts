@@ -27,13 +27,14 @@ export class UserLogComponent implements OnInit {
       this.sharedComponent = sharedComponent
     }
 
-  
-
   ngOnInit(): void {
 
     this.refreshDataFromBackend()
 
-    
+    setTimeout(() => {
+      this.refreshDataFromBackend()
+      this.sharedComponent.registerEmitterListener(this.refreshDataFromBackend.bind(this))
+    }, 500) // sorry
   }
 
   updateLog() {
