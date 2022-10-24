@@ -18,5 +18,8 @@
 
 
 <hr>
-<button (mouseup)="updateLog()" class="my-button"> GO! </button>
+<button (mouseup)="updateLog()" class="my-start-button"> GO </button>
+<button [disabled]="!ongoingRecordings" (mouseup)="stopLog()" class="my-stop-button"> STOP </button>
+<br>
+<i *ngIf="ongoingRecordings"> Ongoing: {{ongoingProject}}/{{ongoingActivity}} (Expires in {{ongoingExpireTimeH}}h:{{ongoingExpireTimeMin}}min)</i>
 <hr>

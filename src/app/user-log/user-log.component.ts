@@ -19,6 +19,11 @@ export class UserLogComponent implements OnInit {
   disableSelect: boolean = false
   activityList: string[] = []
   projectList: string[] = []
+  ongoingRecordings = false
+  ongoingActivity = ""
+  ongoingProject = ""
+  ongoingExpireTimeH = 0
+  ongoingExpireTimeMin = 0
 
   constructor(
     restClient: BackEndRestClient,
@@ -35,6 +40,8 @@ export class UserLogComponent implements OnInit {
       this.refreshDataFromBackend()
       this.sharedComponent.registerEmitterListener(this.refreshDataFromBackend.bind(this))
     }, 500) // sorry
+
+    setInterval(this.refreshDataFromBackend.bind(this), 125 * 1000);
   }
 
   updateLog() {
@@ -45,11 +52,11 @@ export class UserLogComponent implements OnInit {
     const newProjectName = <HTMLInputElement>document.getElementById('selected_project')
     console.log(newProjectName.textContent)
 
-    if (newActivityName.textContent != null && newProjectName.textContent != null) {
-      this.restClient?.updateLogging(GlobalVariable.auth_token, newActivityName.textContent, newProjectName.textContent, 60).subscribe(retData => {
+    if (GlobalVariable.authenticated && newActivityName.textContent != null && newProjectName.textContent != null) {
+      this.restClient?.updateLogging(GlobalVariable.auth_token, newActivityName.textContent, newProjectName.textContent, 1).subscribe(retData => {
       
       this.sharedComponent.showSnackbar("Logging started!", 2500)
-      console.log("Logging started!!")
+      this.refreshDataFromBackend()
       }, error => {
         console.log("Could not start logging :-(")
         alert("Could not start logging?!")
@@ -57,7 +64,23 @@ export class UserLogComponent implements OnInit {
     } else {
       alert("You must select projects and activities!")
     }
+  }
 
+  stopLog() {
+    console.log("stopLog")
+
+    if (!GlobalVariable.authenticated) {
+      console.log("user-log: stopLog(): Not authenticated.")
+      return
+    }
+
+    this.restClient.putStopLogging(GlobalVariable.auth_token).subscribe(retData => {
+      
+      this.sharedComponent.showSnackbar("Logging stopped", 5000)
+      this.refreshDataFromBackend()
+      }, error => {
+        alert("Could not stop logging?!")
+      });
   }
 
   refreshDataFromBackend() {
@@ -72,14 +95,32 @@ export class UserLogComponent implements OnInit {
       if (retData != null && "activityTypes" in retData) {
         this.activityList = retData["activityTypes"]
       }
-    }, error => {
-      console.log("DID NOT GET ACTIVITIES")
-    });
+      }, error => {
+        console.log("DID NOT GET ACTIVITIES")
+      });
 
     this.restClient?.getProjects(GlobalVariable.auth_token).subscribe(retData => {
       
       if (retData != null && "projects" in retData) {
         this.projectList = retData["projects"]
+      }
+    }, error => {
+      console.log("DID NOT GET PROJECTS")
+    });
+
+    this.restClient.getLastLog(GlobalVariable.auth_token).subscribe(retData => {
+      
+      if (retData == null) {return}
+
+      if ("ongoing" in retData) { this.ongoingRecordings = retData["ongoing"]}
+      if ("activity" in retData) { this.ongoingActivity = retData["activity"]}
+      if ("project" in retData) { this.ongoingProject = retData["project"]}
+      if ("expireTimeMs" in retData && retData["expireTimeMs"] != null) {
+        const diffMs = retData["expireTimeMs"] - Date.now()
+        var hour = Math.floor((diffMs / (1000 * 60)) / 60)
+        var minute = Math.floor((diffMs / (1000 * 60)) % 60) + 1
+        this.ongoingExpireTimeH = hour >= 0 ? hour : 0
+        this.ongoingExpireTimeMin = minute >= 1 ? minute : 1
       }
     }, error => {
       console.log("DID NOT GET PROJECTS")

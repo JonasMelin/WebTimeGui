@@ -19,6 +19,14 @@ export class BackEndRestClient {
     return this.httpClient.get('api/v1/activity/' + token);
   }
 
+  getLastLog(token: string): Observable<any>  {
+    return this.httpClient.get('api/v1/logging/lastlog/' + token);
+  }
+
+  putStopLogging(token: string): Observable<any>  {
+    return this.httpClient.put('api/v1/logging/stop/' + token, null);
+  }
+
   registerUser(first: string, last: string, email: string): Observable<any>  {
     var body = {
         "firstName": first,
